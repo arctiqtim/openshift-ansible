@@ -1,4 +1,10 @@
 ---
+- name: Deploy OCP
+  hosts: nodes
+  gather_facts: no
+  tasks:
+    - debug: msg="We are now going to run the OCP installer"
+
 - import_playbook: init/main.yml
 
 - import_playbook: common/private/control_plane.yml
