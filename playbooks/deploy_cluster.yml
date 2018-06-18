@@ -4,6 +4,9 @@
   gather_facts: no
   tasks:
     - debug: msg="We are now going to run the OCP installer"
+    - name: Set IP
+      set_fact:
+        openshift_ip: "{{ ansible_default_ipv4.address }}"
 
 - import_playbook: init/main.yml
 
