@@ -2,6 +2,7 @@
 - name: Deploy OCP
   hosts: nodes
   gather_facts: yes
+  become: yes
   tasks:
     - debug: msg="We are now going to run the OCP installer"
     - name: Set IP
