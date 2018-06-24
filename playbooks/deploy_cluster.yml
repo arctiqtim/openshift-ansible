@@ -5,9 +5,9 @@
   become: yes
   tasks:
     - debug: msg="We are now going to run the OCP installer"
-    - name: Set IP
-      set_fact:
-        openshift_ip: "{{ ansible_default_ipv4.address }}"
+    # - name: Set IP
+    #   set_fact:
+    #     openshift_ip: "{{ ansible_default_ipv4.address }}"
 
 - import_playbook: init/main.yml
 
@@ -17,9 +17,9 @@
 
 - import_playbook: common/private/components.yml
 
-- name: Debug end
-  hosts: nodes
-  gather_facts: no
-  become: yes
-  tasks:
-    - debug: var=openshift_ip
+# - name: Debug end
+#   hosts: nodes
+#   gather_facts: no
+#   become: yes
+#   tasks:
+#     - debug: var=openshift_ip
