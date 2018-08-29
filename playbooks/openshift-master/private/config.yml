@@ -36,23 +36,6 @@
     debug:
       var: g_openshift_master_is_scaleup
 
-  - name: Check for RPM generated config marker file .config_managed
-    stat:
-      path: /etc/origin/.config_managed
-    register: rpmgenerated_config
-
-  - name: Remove RPM generated config files if present
-    file:
-      path: "/etc/origin/{{ item }}"
-      state: absent
-    when:
-    - rpmgenerated_config.stat.exists == true
-    - openshift_deployment_type == 'openshift-enterprise'
-    with_items:
-    - master
-    - node
-    - .config_managed
-
   roles:
   - openshift_facts
   post_tasks:
@@ -86,6 +69,9 @@
   - name: Check for existing configuration
     stat:
       path: /etc/origin/master/master-config.yaml
+      get_checksum: false
+      get_attributes: false
+      get_mime: false
     register: master_config_stat
 
   - name: Set clean install fact
@@ -105,6 +91,9 @@
   - name: Check if atomic-openshift-master sysconfig exists yet
     stat:
       path: /etc/sysconfig/atomic-openshift-master
+      get_checksum: false
+      get_attributes: false
+      get_mime: false
     register: l_aom_exists
 
   - name: Preserve OPENSHIFT_DEFAULT_REGISTRY master parameter if present
@@ -115,6 +104,9 @@
   - name: Check if atomic-openshift-master-api sysconfig exists yet
     stat:
       path: /etc/sysconfig/atomic-openshift-master-api
+      get_checksum: false
+      get_attributes: false
+      get_mime: false
     register: l_aom_api_exists
 
   - name: Preserve OPENSHIFT_DEFAULT_REGISTRY master-api parameter if present
@@ -125,6 +117,9 @@
   - name: Check if atomic-openshift-master-controllers sysconfig exists yet
     stat:
       path: /etc/sysconfig/atomic-openshift-master-controllers
+      get_checksum: false
+      get_attributes: false
+      get_mime: false
     register: l_aom_controllers_exists
 
   - name: Preserve OPENSHIFT_DEFAULT_REGISTRY master-controllers parameter if present

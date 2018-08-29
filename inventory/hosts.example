@@ -147,10 +147,8 @@ debug_level=2
 # The following options must not be used
 # - openshift_docker_options
 #openshift_docker_use_system_container=False
-# Install and run cri-o. By default this will install cri-o as a system container.
+# Install and run cri-o.
 #openshift_use_crio=False
-# You can install cri-o as an rpm by setting the following variable:
-#openshift_crio_use_rpm=False
 # NOTE: This uses openshift_docker_systemcontainer_image_registry_override as it's override
 # just as container-engine does.
 # Force the registry to use for the container-engine/crio system container. By default the registry
@@ -855,6 +853,10 @@ debug_level=2
 #
 # Detected names may be overridden by specifying the "names" key
 #openshift_master_named_certificates=[{"certfile": "/path/to/custom1.crt", "keyfile": "/path/to/custom1.key", "names": ["public-master-host.com"], "cafile": "/path/to/custom-ca1.crt"}]
+#
+# Add a trusted CA to all pods, copies from the control host, may be multiple
+# certs in one file
+#openshift_additional_ca=/path/to/additional-ca.crt
 
 # Session options
 #openshift_master_session_name=ssn
